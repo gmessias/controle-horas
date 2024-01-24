@@ -1,3 +1,4 @@
+mod config;
 mod opts;
 mod usuario;
 mod registro_horas;
@@ -18,9 +19,14 @@ fn main() {
     let mut exe_path = env::current_exe().unwrap();
     exe_path.pop();
 
+    //let username = config::get_current_user(&exe_path).expect("Unable to read username");
+
     match opts.subcmd {
-        Command::Create(c) => command_create_user(&exe_path, &c.usuario),
-        Command::Insert(c) => command_insert_time_recording(&exe_path, &c),
-        Command::Read(r) => command_read_json(&exe_path, &r),
+        Command::Create(cc) => {
+            config::create_config_file(&exe_path, &cc.usuario).expect("Unable to set current user");
+            command_create_user(&exe_path, &cc.usuario);
+        },
+        Command::Insert(ci) => command_insert_time_recording(&exe_path, &ci),
+        Command::Read(cr) => command_read_json(&exe_path, &cr),
     }
 }

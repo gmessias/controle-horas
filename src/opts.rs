@@ -22,8 +22,8 @@ pub struct Create {
 
 #[derive(Parser, Debug)]
 pub struct Insert {
-    #[clap(short, long)]
-    pub usuario: String,
+    //#[clap(short, long)]
+    //pub usuario: String,
     #[clap(long)]
     pub id: String,
     #[clap(long)]
@@ -34,8 +34,8 @@ pub struct Insert {
 
 #[derive(Parser, Debug)]
 pub struct Read {
-    #[clap(short, long)]
-    pub usuario: String,
+    //#[clap(short, long)]
+    //pub usuario: String,
     #[clap(long)]
     pub id: Option<String>,
     #[clap(long)]
