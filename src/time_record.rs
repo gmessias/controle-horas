@@ -2,8 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct RegistroHoras {
+pub struct TimeRecord {
     pub id: String,
-    pub data: NaiveDate,
-    pub horas: u8,
+    pub date: NaiveDate,
+    pub hours: u8,
 }

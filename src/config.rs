@@ -7,7 +7,7 @@ use std::path::PathBuf;
 const CONFIG_FILE_NAME: &str = "config.txt";
 
 pub fn config_file_exists(exe_path: &PathBuf) -> bool {
-    let mut path = exe_path.clone();
+    let path = exe_path.clone();
     let path = path.join(CONFIG_FILE_NAME);
 
     fs::metadata(&path).is_ok()

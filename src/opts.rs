@@ -16,30 +16,26 @@ pub enum Command {
 
 #[derive(Parser, Debug)]
 pub struct Create {
-    #[clap(short, long)]
-    pub usuario: String,
+    #[clap(short, long = "user")]
+    pub user: String,
 }
 
 #[derive(Parser, Debug)]
 pub struct Insert {
-    //#[clap(short, long)]
-    //pub usuario: String,
-    #[clap(long)]
+    #[clap(long = "id")]
     pub id: String,
-    #[clap(long)]
-    pub data: String,
-    #[clap(long)]
-    pub horas: u8,
+    #[clap(long = "data")]
+    pub date: String,
+    #[clap(long = "horas")]
+    pub hours: u8,
 }
 
 #[derive(Parser, Debug)]
 pub struct Read {
-    //#[clap(short, long)]
-    //pub usuario: String,
-    #[clap(long)]
+    #[clap(long = "id")]
     pub id: Option<String>,
-    #[clap(long)]
-    pub dia: Option<String>,
-    #[clap(long)]
-    pub mes: Option<String>,
+    #[clap(long = "dia")]
+    pub day: Option<String>,
+    #[clap(long = "mes")]
+    pub month: Option<String>,
 }
