@@ -27,7 +27,9 @@ pub struct Insert {
     #[clap(long = "data")]
     pub date: String,
     #[clap(long = "horas")]
-    pub hours: u8,
+    pub hours: Option<u8>,
+    #[clap(long = "minutos")]
+    pub minutes: Option<u8>,
 }
 
 #[derive(Parser, Debug)]

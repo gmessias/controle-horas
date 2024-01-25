@@ -23,14 +23,28 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                     if let Some(id) = &cr.id {
                         let mut records = HashMap::new();
                         let mut total_hours_in_id = 0;
+                        let mut total_minutes_in_id = 0;
 
                         for record in &user.time_record {
                             if &record.id == id {
                                 let date = record.date.format("%d/%m/%Y").to_string();
-                                let total_hours = records.entry(date).or_insert(0);
+                                let total_hours = records.entry(date).or_insert((0, 0));
 
-                                *total_hours += record.hours;
+                                total_hours.0 += record.hours;
+                                total_hours.1 += record.minutes;
+
+                                if total_hours.1 >= 60 {
+                                    total_hours.0 += total_hours.1 / 60;
+                                    total_hours.1 %= 60;
+                                }
+
                                 total_hours_in_id += record.hours;
+                                total_minutes_in_id += record.minutes;
+
+                                if total_minutes_in_id >= 60 {
+                                    total_hours_in_id += total_minutes_in_id / 60;
+                                    total_minutes_in_id %= 60;
+                                }
                             }
                         }
 
@@ -41,22 +55,38 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
 
                         for date in dates {
                             println!("\nData: {}", date);
-                            println!("Total de horas: {}", records[date]);
+                            println!("Total de horas: {}", records[date].0);
+                            println!("Total de minutos: {}", records[date].1);
                         }
 
                         println!("\nTotal de horas gastas neste ID: {}", total_hours_in_id);
+                        println!("Total de minutos gastos neste ID: {}", total_minutes_in_id);
                     } else if let Some(day) = &cr.day {
                         let day = NaiveDate::parse_from_str(day, "%d/%m/%Y").unwrap();
                         let mut records = HashMap::new();
                         let mut total_hours_in_day = 0;
+                        let mut total_minutes_in_day = 0;
 
                         for record in &user.time_record {
                             if record.date == day {
                                 let id = record.id.clone();
-                                let total_hours = records.entry(id).or_insert(0);
+                                let total_hours = records.entry(id).or_insert((0, 0));
 
-                                *total_hours += record.hours;
+                                total_hours.0 += record.hours;
+                                total_hours.1 += record.minutes;
+
+                                if total_hours.1 >= 60 {
+                                    total_hours.0 += total_hours.1 / 60;
+                                    total_hours.1 %= 60;
+                                }
+
                                 total_hours_in_day += record.hours;
+                                total_minutes_in_day += record.minutes;
+
+                                if total_minutes_in_day >= 60 {
+                                    total_hours_in_day += total_minutes_in_day / 60;
+                                    total_minutes_in_day %= 60;
+                                }
                             }
                         }
 
@@ -64,10 +94,12 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
 
                         for (id, total_hours) in &records {
                             println!("\nID: {}", id);
-                            println!("Total de horas: {}", total_hours);
+                            println!("Total de horas: {}", total_hours.0);
+                            println!("Total de minutos: {}", total_hours.1);
                         }
 
                         println!("\nTotal de horas no dia: {}", total_hours_in_day);
+                        println!("Total de minutos no dia: {}", total_minutes_in_day);
                     } else if let Some(month) = &cr.month {
                         let month_year = NaiveDate::parse_from_str(&format!("01/{}", month), "%d/%m/%Y").unwrap();
                         let mut records = HashMap::new();
@@ -75,9 +107,15 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                         for record in &user.time_record {
                             if record.date.month() == month_year.month() && record.date.year() == month_year.year() {
                                 let id = record.id.clone();
-                                let total_hours = records.entry(id).or_insert(0);
+                                let total_hours = records.entry(id).or_insert((0, 0));
 
-                                *total_hours += record.hours;
+                                total_hours.0 += record.hours;
+                                total_hours.1 += record.minutes;
+
+                                if total_hours.1 >= 60 {
+                                    total_hours.0 += total_hours.1 / 60;
+                                    total_hours.1 %= 60;
+                                }
                             }
                         }
 
@@ -85,7 +123,8 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
 
                         for (id, total_hours) in &records {
                             println!("\nID: {}", id);
-                            println!("Total de horas: {}", total_hours);
+                            println!("Total de horas: {}", total_hours.0);
+                            println!("Total de minutos: {}", total_hours.1);
                         }
                     }
                 }
