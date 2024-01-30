@@ -45,8 +45,8 @@ pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
                     user.time_record.push(TimeRecord {
                         id: ci.id.clone(),
                         date: NaiveDate::parse_from_str(&ci.date, "%d/%m/%Y").unwrap(),
-                        hours: hours,
-                        minutes: minutes,
+                        hours,
+                        minutes,
                     });
 
                     let json = serde_json::to_string_pretty(&user).unwrap();
