@@ -1,10 +1,11 @@
-use crate::opts::Insert;
-use crate::time_record::TimeRecord;
-use crate::user::User;
 use chrono::NaiveDate;
 use std::fs;
 use std::path::PathBuf;
+
 use crate::config::{config_file_exists, read_config_file};
+use crate::opts::Insert;
+use crate::time_record::TimeRecord;
+use crate::user::User;
 
 pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
     let mut hours = ci.hours.unwrap_or(0);
@@ -54,7 +55,7 @@ pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
 
                     println!("Registro de horas inserido com sucesso.");
                 }
-            },
+            }
             Err(e) => println!("Erro ao ler o arquivo de configuração: {}", e),
         }
     } else {

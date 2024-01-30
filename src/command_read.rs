@@ -1,11 +1,12 @@
-use crate::opts::Read;
-use crate::user::User;
 use chrono::Datelike;
 use chrono::NaiveDate;
 use std::collections::HashMap;
 use std::fs;
 use std::path::PathBuf;
+
 use crate::config::{config_file_exists, read_config_file};
+use crate::opts::Read;
+use crate::user::User;
 
 pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
     if config_file_exists(&exe_path) {
@@ -128,7 +129,7 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                         }
                     }
                 }
-            },
+            }
             Err(e) => println!("Erro ao ler o arquivo de configuração: {}", e),
         }
     } else {

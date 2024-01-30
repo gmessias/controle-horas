@@ -17,7 +17,7 @@ pub fn read_config_file(exe_path: &PathBuf) -> io::Result<String> {
     let mut path = exe_path.clone();
     path = path.join(CONFIG_FILE_NAME);
 
-    if config_file_exists(&exe_path){
+    if config_file_exists(&exe_path) {
         let file = File::open(path)?;
         let reader = io::BufReader::new(file);
 

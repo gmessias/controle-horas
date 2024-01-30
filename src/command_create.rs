@@ -1,6 +1,7 @@
-use crate::user::User;
 use std::fs;
 use std::path::PathBuf;
+
+use crate::user::User;
 
 pub fn command_create_user(exe_path: &PathBuf, user: &str) {
     let mut path = exe_path.clone();
