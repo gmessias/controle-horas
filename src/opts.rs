@@ -37,6 +37,9 @@ pub struct Insert {
     pub hours: Option<u8>,
     #[clap(short = 'm', long = "minutos")]
     pub minutes: Option<u8>,
+    #[clap(short = 't', long = "tempo")]
+    pub time: Option<String>,
+
 }
 
 #[derive(Parser, Debug)]

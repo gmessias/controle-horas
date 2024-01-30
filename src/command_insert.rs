@@ -7,7 +7,20 @@ use std::path::PathBuf;
 use crate::config::{config_file_exists, read_config_file};
 
 pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
-    if ci.hours.is_none() && ci.minutes.is_none() {
+    let mut hours = ci.hours.unwrap_or(0);
+    let mut minutes = ci.minutes.unwrap_or(0);
+
+    if let Some(time) = &ci.time {
+        if time.contains(':') {
+            let parts: Vec<&str> = time.split(':').collect();
+            hours += parts[0].parse::<u8>().unwrap_or(0);
+            minutes += parts[1].parse::<u8>().unwrap_or(0);
+        } else {
+            hours += time.parse::<u8>().unwrap_or(0);
+        }
+    }
+
+    if hours == 0 && minutes == 0 {
         println!("Erro: Você deve fornecer pelo menos horas ou minutos.");
         return;
     }
@@ -23,9 +36,6 @@ pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
                 } else {
                     let data = fs::read_to_string(&path).unwrap();
                     let mut user: User = serde_json::from_str(&data).unwrap();
-
-                    let mut hours = ci.hours.unwrap_or(0);
-                    let mut minutes = ci.minutes.unwrap_or(0);
 
                     if minutes >= 60 {
                         hours += minutes / 60;
