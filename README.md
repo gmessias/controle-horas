@@ -64,3 +64,23 @@ controle-horas read --mes MES </br>
 ```
 
 Choosing to read by ID, DIA or MES will result in the data being filtered according to your argument.
+
+### Observation
+
+The file in the root of the source code project named template-username.json was created from these commands:
+
+```
+controle-horas create --user template-username
+controle-horas insert --id 1 --data 01/01/2024 --horas 3
+controle-horas insert --id 1 --data 01/01/2024 --horas 2 --minutos 30
+controle-horas insert --id 2 --data 01/01/2024 --horas 2 --minutos 30
+controle-horas insert --id 3 --data 02/01/2024 --horas 8 --minutos 00
+controle-horas insert --id 4 --data 03/01/2024 --horas 4 --minutos 45
+controle-horas insert --id 5 --data 12/01/2024 --horas 6 --minutos 15
+controle-horas insert --id 5 --data 12/01/2024 --horas 1 --minutos 45
+controle-horas insert --id 5 --data 13/01/2024 --horas 0 --minutos 50
+controle-horas insert --id 5 --data 13/01/2024 --horas 7 --minutos 10
+controle-horas insert --id 5 --data 14/01/2024 --horas 2
+controle-horas insert --id 6 --data 15/02/2024 --minutos 59
+controle-horas insert --id 7 --data 16/01/2024 --minutos 60
+```
