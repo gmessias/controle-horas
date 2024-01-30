@@ -1,7 +1,11 @@
 use clap::Parser;
 
 #[derive(Parser, Debug)]
-#[clap(author, version, about)]
+#[command(name = "Controle de Horas CLI")]
+#[command(author = "Gabriel Messias https://github.com/GMessias")]
+#[command(version = "0.1.0")]
+#[command(help_template = "{author-with-newline} {about-section}Version: {version} \n {usage-heading} {usage} \n {all-args} {tab}")]
+#[command(about, long_about = None)]
 pub struct Opts {
     #[clap(subcommand)]
     pub subcmd: Command,
@@ -9,35 +13,38 @@ pub struct Opts {
 
 #[derive(Parser, Debug)]
 pub enum Command {
+    #[clap(about = "Cria um usuário e vincula os próximos comandos a ele.")]
     Create(Create),
+    #[clap(about = "Insere um novo registro.")]
     Insert(Insert),
+    #[clap(about = "Lê os registros de acordo com o filtro informado.")]
     Read(Read),
 }
 
 #[derive(Parser, Debug)]
 pub struct Create {
-    #[clap(short, long = "user")]
+    #[clap(short = 'u', long = "user")]
     pub user: String,
 }
 
 #[derive(Parser, Debug)]
 pub struct Insert {
-    #[clap(long = "id")]
+    #[clap(short = 'i', long = "id")]
     pub id: String,
-    #[clap(long = "data")]
+    #[clap(short = 'd', long = "data")]
     pub date: String,
-    #[clap(long = "horas")]
+    #[clap(short = 'H', long = "horas")]
     pub hours: Option<u8>,
-    #[clap(long = "minutos")]
+    #[clap(short = 'm', long = "minutos")]
     pub minutes: Option<u8>,
 }
 
 #[derive(Parser, Debug)]
 pub struct Read {
-    #[clap(long = "id")]
+    #[clap(short = 'I', long = "id")]
     pub id: Option<String>,
-    #[clap(long = "dia")]
+    #[clap(short = 'D', long = "dia")]
     pub day: Option<String>,
-    #[clap(long = "mes")]
+    #[clap(short = 'M', long = "mes")]
     pub month: Option<String>,
 }
