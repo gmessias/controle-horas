@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::time_record::TimeRecord;
+use crate::models::time_record::TimeRecord;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct User {

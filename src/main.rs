@@ -1,17 +1,14 @@
 use clap::Parser;
-use command_create::command_create_user;
-use command_insert::command_insert_time_recording;
-use command_read::command_read_json;
+use crate::commands::command_create::command_create_user;
+use crate::commands::command_insert::command_insert_time_recording;
+use crate::commands::command_read::command_read_json;
 use opts::{Command, Opts};
 use std::env;
 
 mod config;
 mod opts;
-mod user;
-mod time_record;
-mod command_create;
-mod command_insert;
-mod command_read;
+mod models;
+mod commands;
 
 fn main() {
     let opts: Opts = Opts::parse();

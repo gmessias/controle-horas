@@ -6,7 +6,7 @@ use std::path::PathBuf;
 
 use crate::config::{config_file_exists, read_config_file};
 use crate::opts::Read;
-use crate::user::User;
+use crate::models::user::User;
 
 pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
     if config_file_exists(&exe_path) {
