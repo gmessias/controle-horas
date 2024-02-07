@@ -49,19 +49,7 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                             }
                         }
 
-                        let mut dates: Vec<_> = records.keys().collect();
-                        dates.sort();
-
-                        println!("ID: {}", id);
-
-                        for date in dates {
-                            println!("\nData: {}", date);
-                            println!("Total de horas: {}", records[date].0);
-                            println!("Total de minutos: {}", records[date].1);
-                        }
-
-                        println!("\nTotal de horas gastas neste ID: {}", total_hours_in_id);
-                        println!("Total de minutos gastos neste ID: {}", total_minutes_in_id);
+                        print_id_result(&id, &records, total_hours_in_id, total_minutes_in_id);
                     } else if let Some(day) = &cr.day {
                         let day = NaiveDate::parse_from_str(day, "%d/%m/%Y").unwrap();
                         let mut records = HashMap::new();
@@ -91,16 +79,7 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                             }
                         }
 
-                        println!("Data: {}", day.format("%d/%m/%Y"));
-
-                        for (id, total_hours) in &records {
-                            println!("\nID: {}", id);
-                            println!("Total de horas: {}", total_hours.0);
-                            println!("Total de minutos: {}", total_hours.1);
-                        }
-
-                        println!("\nTotal de horas no dia: {}", total_hours_in_day);
-                        println!("Total de minutos no dia: {}", total_minutes_in_day);
+                        print_day_result(&day, &records, total_hours_in_day, total_minutes_in_day);
                     } else if let Some(month) = &cr.month {
                         let month_year = NaiveDate::parse_from_str(&format!("01/{}", month), "%d/%m/%Y").unwrap();
                         let mut records = HashMap::new();
@@ -120,13 +99,7 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
                             }
                         }
 
-                        println!("Mês: {}", month);
-
-                        for (id, total_hours) in &records {
-                            println!("\nID: {}", id);
-                            println!("Total de horas: {}", total_hours.0);
-                            println!("Total de minutos: {}", total_hours.1);
-                        }
+                        print_month_result(&month, &records);
                     }
                 }
             }
@@ -134,5 +107,44 @@ pub fn command_read_json(exe_path: &PathBuf, cr: &Read) {
         }
     } else {
         println!("O arquivo de configuração não existe. Por favor, crie um usando o comando Create.");
+    }
+}
+
+fn print_id_result(id: &str, records: &HashMap<String, (u8, u8)>, total_hours_in_id: u8, total_minutes_in_id: u8) {
+    let mut dates: Vec<_> = records.keys().collect();
+    dates.sort();
+
+    println!("ID: {}", id);
+
+    for date in dates {
+        println!("\nData: {}", date);
+        println!("Total de horas: {}", records[date].0);
+        println!("Total de minutos: {}", records[date].1);
+    }
+
+    println!("\nTotal de horas gastas neste ID: {}", total_hours_in_id);
+    println!("Total de minutos gastos neste ID: {}", total_minutes_in_id);
+}
+
+fn print_day_result(day: &NaiveDate, records: &HashMap<String, (u8, u8)>, total_hours_in_day: u8, total_minutes_in_day: u8) {
+    println!("Data: {}", day.format("%d/%m/%Y"));
+
+    for (id, total_hours) in records {
+        println!("\nID: {}", id);
+        println!("Total de horas: {}", total_hours.0);
+        println!("Total de minutos: {}", total_hours.1);
+    }
+
+    println!("\nTotal de horas no dia: {}", total_hours_in_day);
+    println!("Total de minutos no dia: {}", total_minutes_in_day);
+}
+
+fn print_month_result(month: &str, records: &HashMap<String, (u8, u8)>) {
+    println!("Mês: {}", month);
+
+    for (id, total_hours) in records {
+        println!("\nID: {}", id);
+        println!("Total de horas: {}", total_hours.0);
+        println!("Total de minutos: {}", total_hours.1);
     }
 }
