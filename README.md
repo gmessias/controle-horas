@@ -93,3 +93,9 @@ controle-horas insert --id 6 --data 15/02/2024 --minutos 59
 controle-horas insert --id 7 --data 16/02/2024 --minutos 60
 controle-horas insert --id 8 --data 17/01/2024 --tempo 6:33
 ```
+
+### Tests
+
+```
+cargo test
+```
