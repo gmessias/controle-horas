@@ -1,4 +1,5 @@
 use chrono::NaiveDate;
+use crate::commands::process::calculations::convert_minutes_to_hours;
 use crate::config::{config_file_exists, read_config_file};
 use crate::models::time_record::TimeRecord;
 use crate::models::user::User;
@@ -58,10 +59,7 @@ fn insert_time_record(path: &PathBuf, ci: &Insert, mut hours: u8, mut minutes: u
     let data = fs::read_to_string(&path).unwrap();
     let mut user: User = serde_json::from_str(&data).unwrap();
 
-    if minutes >= 60 {
-        hours += minutes / 60;
-        minutes = minutes % 60;
-    }
+    convert_minutes_to_hours(&mut hours, &mut minutes);
 
     user.time_record.push(TimeRecord {
         id: ci.id.clone(),

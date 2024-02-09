@@ -1,7 +1,7 @@
 use chrono::NaiveDate;
 use std::collections::HashMap;
 
-pub fn print_id_result(id: &str, records: &HashMap<String, (u8, u8)>, total_hours_in_id: u8, total_minutes_in_id: u8) {
+pub fn print_id_result(id: &str, records: &HashMap<String, (u8, u8)>, hours: u8, minutes: u8) {
     let mut dates: Vec<_> = records.keys().collect();
     dates.sort();
 
@@ -11,17 +11,17 @@ pub fn print_id_result(id: &str, records: &HashMap<String, (u8, u8)>, total_hour
         print_total_date(date, records[date].0, records[date].1);
     }
 
-    print_result("ID", total_hours_in_id, total_minutes_in_id);
+    print_result("ID", hours, minutes);
 }
 
-pub fn print_day_result(day: &NaiveDate, records: &HashMap<String, (u8, u8)>, total_hours_in_day: u8, total_minutes_in_day: u8) {
+pub fn print_day_result(day: &NaiveDate, records: &HashMap<String, (u8, u8)>, hours: u8, minutes: u8) {
     println!("Data: {}", day.format("%d/%m/%Y"));
 
     for (id, total_hours) in records {
         print_total_id(id, total_hours.0, total_hours.1);
     }
 
-    print_result("DIA", total_hours_in_day, total_minutes_in_day);
+    print_result("DIA", hours, minutes);
 }
 
 pub fn print_month_result(month: &str, records: &HashMap<String, (u8, u8)>) {
