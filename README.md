@@ -47,7 +47,7 @@ controle-horas create --user username
 ```
 Initializes a user, resulting in two files:
 * **config.txt** which has the user's name so that you don't have to enter it when you register every command.
-* **usuario.json** which has the registry information but when it is initialized it will only have the value of the user name itself.
+* **usuario.json** which has the registry information but when it is initialized it will only have the value of the username itself.
 
 ### Insert a record
 

@@ -1,11 +1,10 @@
 use chrono::NaiveDate;
-use std::fs;
-use std::path::PathBuf;
-
 use crate::config::{config_file_exists, read_config_file};
-use crate::opts::Insert;
 use crate::models::time_record::TimeRecord;
 use crate::models::user::User;
+use crate::opts::Insert;
+use std::fs;
+use std::path::PathBuf;
 
 pub fn command_insert_time_recording(exe_path: &PathBuf, ci: &Insert) {
     let (hours, minutes) = parse_time(ci);
