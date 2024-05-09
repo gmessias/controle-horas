@@ -2,6 +2,9 @@
 
 ## Summary
 
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![Windows Terminal](https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=for-the-badge&logo=windows-terminal&logoColor=white)
+
 It was developed on Windows. </br>
 **Objective**: A user records their hours worked on a particular subject. </br>
 **Future Objective / Goal**: this project is in the users, and with a command sends their data to a "central" where some user can check the data of everyone who sends it. </br>
